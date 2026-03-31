@@ -15,15 +15,23 @@ elif not folder.is_dir():
 else: 
     print("Pasta válida")
 
-counter = 1
+confirm = input("Renomear? (s/n): ")
+
+if confirm != "s":
+    print("Operação cancelada.")
+
+else:
+    counter = 1
 
     # Listar os arquivos
 for file in folder.iterdir():
         if file.is_file():
 
             new_name = f"file_{counter}{file.suffix}"
+            new_file = folder / new_name
+            
+            print(f"{file.name} => {new_name}")
 
-            print(f"Antigo: {file.name}")
-            print(f"Novo: {new_name}")
+            file.rename(new_file)
 
             counter += 1
