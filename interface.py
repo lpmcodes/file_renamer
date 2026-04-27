@@ -10,7 +10,7 @@ from rename_files import executar_processo_renomeacao
 class RenomeadorApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("Renomeador Pro - Engenharia")
+        self.root.title("Renomeador de Arquivos")
         self.root.geometry("500x250")
 
         tk.Label(root, text="Caminho da Pasta:", font=("Arial", 10, "bold")).pack(pady=10)
@@ -31,6 +31,17 @@ class RenomeadorApp:
         self.btn_renomear = tk.Button(root, text="2. EXECUTAR RENOMEAÇÃO AGORA", bg="#007bff", fg="white", 
                                       font=("Arial", 10, "bold"), command=self.finalizar)
         # O botão começa escondido
+        
+        # Adiciona o crédito no rodapé
+        self.label_creditos = tk.Label(
+            root, 
+            text="Developed by LPM", 
+            font=("Arial", 8, "italic"), # Fonte menor e em itálico
+            fg="gray"                    # Cor cinza para ser discreto
+        )
+
+        # O anchor='se' (South-East) joga o texto para o canto inferior direito
+        self.label_creditos.pack(side='bottom', anchor='se', padx=10, pady=5)
 
     def selecionar_pasta(self):
         caminho = filedialog.askdirectory()
