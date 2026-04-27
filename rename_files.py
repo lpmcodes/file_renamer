@@ -1,37 +1,25 @@
+import pandas as pd
 from pathlib import Path
 
-# Caminho da pasta
-folder_path = input("Digite o caminho da pasta: ")
-folder = Path(folder_path)
-print(f"O caminho escolhido foi: {folder}")
+def executar_processo_renomeacao(caminho_pasta, dataframe):
+    sucessos = 0
+    erros = 0
+    caminho_pasta = Path(caminho_pasta)
 
-# Validar a pasta
-if not folder.exists():
-    print("O caminho não existe")
-
-elif not folder.is_dir():
-    print("Isso não é uma pasta")
-
-else: 
-    print("Pasta válida")
-
-confirm = input("Renomear? (s/n): ")
-
-if confirm != "s":
-    print("Operação cancelada.")
-
-else:
-    counter = 1
-
-    # Listar os arquivos
-for file in folder.iterdir():
-        if file.is_file():
-
-            new_name = f"file_{counter}{file.suffix}"
-            new_file = folder / new_name
+    for _, linha in dataframe.iterrows():
+        antigo = linha['Nome Atual']
+        novo = linha['Novo Nome']
+        
+        if pd.notna(novo) and antigo != novo:
+            p_antigo = caminho_pasta / antigo
+            p_novo = caminho_pasta / novo
             
-            print(f"{file.name} => {new_name}")
-
-            file.rename(new_file)
-
-            counter += 1
+            try:
+                if p_antigo.exists():
+                    p_antigo.rename(p_novo)
+                    sucessos += 1
+            except Exception as e:
+                print(f"Erro ao renomear {antigo}: {e}")
+                erros += 1
+                
+    return sucessos, erros
