@@ -4,7 +4,7 @@ import os
 import pandas as pd
 from pathlib import Path
 
-# Importamos o motor que você criou
+# Importar motor
 from rename_files import executar_processo_renomeacao
 
 class RenomeadorApp:
@@ -30,14 +30,13 @@ class RenomeadorApp:
 
         self.btn_renomear = tk.Button(root, text="2. EXECUTAR RENOMEAÇÃO AGORA", bg="#007bff", fg="white", 
                                       font=("Arial", 10, "bold"), command=self.finalizar)
-        # O botão começa escondido
         
-        # Adiciona o crédito no rodapé
+        # Crédito rodapé
         self.label_creditos = tk.Label(
             root, 
             text="Developed by LPM", 
-            font=("Arial", 8, "italic"), # Fonte menor e em itálico
-            fg="gray"                    # Cor cinza para ser discreto
+            font=("Arial", 8, "italic"),
+            fg="gray"                    
         )
 
         # O anchor='se' (South-East) joga o texto para o canto inferior direito
@@ -71,16 +70,12 @@ class RenomeadorApp:
 
     def finalizar(self):
         try:
-            # 1. Tenta ler o arquivo Excel que o usuário editou
             df = pd.read_excel(self.caminho_excel)
             
-            # 2. Chama o motor para renomear os arquivos reais
             sucessos, erros = executar_processo_renomeacao(self.entrada_caminho.get(), df)
             
-            # 3. MENSAGEM DE SUCESSO
             messagebox.showinfo("Fim", f"Concluído!\nSucessos: {sucessos}\nErros: {erros}")
             
-            # 4. DELEÇÃO AUTOMÁTICA: O Python apaga o arquivo temporário aqui
             if self.caminho_excel.exists():
                 os.remove(self.caminho_excel)
                 print(f"Arquivo temporário {self.caminho_excel.name} removido.")
