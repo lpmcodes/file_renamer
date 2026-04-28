@@ -1,2 +1,4 @@
-# Renomeador de Arquivos com Python.
-# Baixe o arquivo "Renomeador_LPM.exe" dentro da pasta "dist". Execute o programa e siga as instruções dos pop-ups.
+# Renomeador de Arquivos em Pasta.
+Dentro da pasta "dist", baixe e execute o arquivo "Renomeador_LPM.exe". Após isso siga as intruções nos pop-ups para utilização do software.
+
+Recomendação: No momento em que o Excel abrir, expanda as colunas "A" e "B", para que fique visualmente mais limpo.
